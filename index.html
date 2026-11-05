@@ -1,57 +1,559 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f3f0e7">
-<title>石榴籽足迹 · 一场民族交融现场之旅</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>石榴籽足迹 · 交互原型</title>
 <style>
-:root{--paper:#f3f0e7;--paper2:#e9e5d9;--ink:#25332d;--muted:#758078;--green:#426d5c;--green2:#b9c9b7;--red:#b64d37;--gold:#d4a85d;--line:#d9d5c9;--white:#fbfaf6;--shadow:0 18px 54px #26352b19}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--paper)}button{font:inherit;color:inherit}button:focus-visible{outline:3px solid #d4a85d;outline-offset:3px}.app{min-height:100vh;overflow:hidden}.topbar{height:72px;padding:0 4.5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d9d5c988;position:relative;z-index:3}.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:1px}.brand-mark{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--red);color:white;font-size:18px}.brand small{display:block;font-size:10px;color:var(--muted);font-weight:500;letter-spacing:2px;margin-top:2px}.top-actions{display:flex;align-items:center;gap:22px;color:var(--muted);font-size:12px}.progress-mini{display:flex;align-items:center;gap:9px}.progress-line{width:90px;height:3px;background:#d9d5c9;border-radius:4px;overflow:hidden}.progress-line i{display:block;height:100%;background:var(--red);transition:width .3s}.sound-btn,.icon-btn{border:0;background:none;cursor:pointer;color:inherit;font-size:18px}.landing{max-width:1440px;margin:0 auto;padding:34px 4.5vw 26px}.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:21px}.kicker{font-size:11px;letter-spacing:3px;color:var(--red);font-weight:700}.intro h1{font-size:clamp(28px,3vw,44px);line-height:1.15;margin:10px 0 8px;letter-spacing:1px}.intro p{margin:0;color:#727c73;font-size:14px;line-height:1.8}.trip-stats{display:flex;gap:22px;padding-bottom:5px}.stat{border-left:1px solid var(--line);padding-left:14px}.stat b{display:block;font-size:23px;color:var(--green)}.stat span{font-size:11px;color:var(--muted)}.map-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;min-height:490px;border:1px solid var(--line);background:#f7f5ee;box-shadow:var(--shadow)}.map-wrap{position:relative;overflow:hidden;min-height:490px;background:radial-gradient(ellipse at 50% 45%,#faf9f3 0,#f4f1e8 70%)}.map-wrap:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#dcd7ca44 1px,transparent 1px),linear-gradient(90deg,#dcd7ca44 1px,transparent 1px);background-size:8.33% 10%;pointer-events:none}.map-wrap svg{position:absolute;inset:4% 3%;width:94%;height:91%;overflow:visible}.map-land{fill:#e5e3d5;stroke:#9baa98;stroke-width:1.3;stroke-linejoin:round}.map-island{fill:#e5e3d5;stroke:#9baa98;stroke-width:1}.map-label{fill:#a0aa9c;font-size:11px;letter-spacing:3px}.route{fill:none;stroke:#ba654e;stroke-width:1.5;stroke-dasharray:4 7;opacity:.34}.marker{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:opacity .2s}.marker .halo{fill:#c7523c;opacity:.14}.marker .core{fill:#bd523b;stroke:#fffaf0;stroke-width:2}.marker .num{font-size:8px;fill:#fff;text-anchor:middle;dominant-baseline:central;font-weight:700}.marker:hover{transform:scale(1.3)}.marker.done .halo{fill:#426d5c;opacity:.2}.marker.done .core{fill:#426d5c}.marker.selected .halo{opacity:.4}.map-compass{position:absolute;top:24px;left:28px;color:#8a968b;font-size:10px;letter-spacing:1px}.map-compass b{display:block;font-size:20px;font-weight:400;margin-bottom:2px}.map-note{position:absolute;bottom:18px;left:22px;font-size:10px;color:#829084;letter-spacing:1px}.map-side{border-left:1px solid var(--line);background:#f8f6f0;display:flex;flex-direction:column;min-height:490px}.side-head{padding:21px 22px 13px;border-bottom:1px solid var(--line)}.side-headline{display:flex;align-items:baseline;justify-content:space-between}.side-head h2{font-size:14px;letter-spacing:2px;margin:0}.side-head span{font-size:11px;color:var(--muted)}.side-head p{font-size:11px;color:#849087;margin:8px 0 0}.station-list{overflow:auto;padding:4px 14px;flex:1;max-height:380px}.station{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;text-align:left;width:100%;padding:11px 8px;border:0;border-bottom:1px solid #e6e2d8;background:none;cursor:pointer}.station:hover,.station.active{background:#eeeee5}.station-num{height:24px;width:24px;border-radius:50%;display:grid;place-items:center;background:#e5e1d6;color:#738075;font-size:10px}.station.done .station-num{background:#426d5c;color:#fff}.station-name{font-size:12px;font-weight:650;display:block}.station-place{display:block;font-size:10px;color:#879087;margin-top:3px}.station-status{color:#b4b9ad;font-size:13px}.station.done .station-status{color:#426d5c}.selected-card{padding:17px 21px 19px;border-top:1px solid var(--line);background:#f2f0e8}.selected-meta{font-size:10px;color:var(--red);letter-spacing:1.5px}.selected-card h3{font-size:18px;margin:6px 0 4px}.selected-card p{font-size:11px;color:#6d796f;margin:0;line-height:1.65}.primary{display:flex;justify-content:center;align-items:center;gap:10px;width:100%;margin-top:13px;padding:11px 14px;border:0;background:var(--green);color:white;cursor:pointer;font-weight:650;font-size:12px;transition:background .2s}.primary:hover{background:#315645}.primary:disabled{opacity:.45;cursor:not-allowed}.footnote{padding-top:14px;display:flex;justify-content:space-between;font-size:10px;color:#8e968c}.footnote span:last-child{letter-spacing:1px}
-.scene{position:fixed;inset:0;z-index:10;background:#18251f;display:none;color:white}.scene.open{display:block;animation:fadeIn .35s}.scene-landscape{position:absolute;inset:0;overflow:hidden;perspective:900px;background:#9cb4a5}.scene-bg{position:absolute;inset:-5%;background:linear-gradient(180deg,#b8cfca 0%,#d9d9c2 42%,#c4b995 100%);transition:transform .2s ease-out}.scene-bg:before{content:"";position:absolute;inset:20% -4% 0;background:linear-gradient(160deg,transparent 28%,#819c82 28.2% 43%,transparent 43.2%),linear-gradient(25deg,transparent 35%,#718b73 35.2% 55%,transparent 55.2%),linear-gradient(174deg,transparent 48%,#9ca57d 48.2% 70%,transparent 70.2%)}.scene-bg:after{content:"";position:absolute;bottom:-10%;left:-4%;right:-4%;height:48%;background:linear-gradient(170deg,#728265,#465d4d 80%);clip-path:polygon(0 30%,25% 8%,48% 35%,70% 0,100% 27%,100% 100%,0 100%)}.scene-grain{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,#fff4 0,transparent 36%),linear-gradient(90deg,#111b216e,transparent 50%,#17251b30)}.scene-vignette{position:absolute;inset:0;box-shadow:inset 0 0 180px #14251eaa}.scene-top{position:absolute;top:0;left:0;right:0;padding:25px 4vw;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(#15231f66,transparent)}.back{border:1px solid #ffffff66;background:#15231f44;color:white;padding:9px 13px;cursor:pointer;font-size:12px}.scene-counter{font-size:11px;letter-spacing:2px;color:#ffffffbf}.scene-content{position:absolute;left:8vw;bottom:9vh;max-width:510px}.scene-location{font-size:11px;color:#f2cf88;letter-spacing:2px}.scene-content h2{font-size:clamp(30px,4vw,54px);margin:9px 0;line-height:1.12}.scene-content .lead{font-size:14px;line-height:1.9;color:#ffffffd9;max-width:430px}.scene-controls{display:flex;gap:10px;margin-top:22px}.ghost-btn{background:#17251f66;border:1px solid #ffffff8c;color:white;padding:11px 15px;cursor:pointer;font-size:12px}.ghost-btn:hover{background:#ffffff25}.guide{position:absolute;right:5vw;bottom:8vh;width:315px;background:#f8f6ee;color:var(--ink);padding:20px;box-shadow:0 15px 50px #10201855;display:none}.guide.show{display:block;animation:slideUp .3s}.guide-head{display:flex;align-items:center;gap:11px;margin-bottom:13px}.guide-avatar{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#d9e1cf;color:#41644f;font-size:23px;border:1px solid #b9c9b7}.guide-head b{font-size:13px}.guide-head small{display:block;color:#899287;font-size:10px;margin-top:3px}.guide-text{font-size:12px;line-height:1.9;color:#526157;margin:0}.guide-next{width:100%;border:0;background:var(--green);color:white;padding:10px;margin-top:14px;cursor:pointer;font-size:11px}.clue-pop{position:absolute;left:50%;top:20%;transform:translateX(-50%);width:min(360px,88vw);background:#fbfaf3;color:var(--ink);padding:22px;box-shadow:0 15px 50px #18231d66;display:none;z-index:2}.clue-pop.open{display:block;animation:slideUp .25s}.clue-pop button{float:right;border:0;background:none;font-size:18px;cursor:pointer}.clue-pop h3{font-size:16px;margin:0 0 9px}.clue-pop p{font-size:12px;color:#637066;line-height:1.85;margin:0}.hotspot{position:absolute;border:1px solid #fff9;background:#fcf7d3aa;width:35px;height:35px;border-radius:50%;cursor:pointer;box-shadow:0 0 0 7px #ffffff25,0 0 22px #fff7;animation:pulse 2s infinite}.hotspot:after{content:"+";color:#435a4c;font-size:21px;line-height:32px}.hotspot.h1{left:37%;top:48%}.hotspot.h2{left:67%;top:58%}.hotspot.h3{left:82%;top:39%}.quiz{position:absolute;inset:0;background:#16221ecc;display:none;align-items:center;justify-content:center;padding:20px}.quiz.open{display:flex}.quiz-box{width:min(520px,100%);background:#f8f6ef;color:var(--ink);padding:30px;box-shadow:0 20px 65px #0e171399}.quiz-label{font-size:10px;color:var(--red);letter-spacing:2px}.quiz-box h3{font-size:22px;line-height:1.5;margin:11px 0 18px}.answers{display:grid;gap:9px}.answer{padding:12px 14px;text-align:left;background:#f1efe7;border:1px solid #dedacf;cursor:pointer;font-size:12px}.answer:hover{border-color:var(--green)}.answer.correct{background:#e2ede2;border-color:#6c967a}.answer.wrong{background:#f5e5df;border-color:#c9826b}.quiz-feedback{min-height:21px;font-size:11px;color:var(--muted);margin-top:10px}.quiz-actions{display:flex;justify-content:flex-end;gap:10px}.quiet{border:1px solid var(--line);background:transparent;padding:10px 15px;cursor:pointer;font-size:11px}.completion{position:fixed;z-index:20;inset:0;background:#1e3028e8;color:white;display:none;align-items:center;justify-content:center;text-align:center;padding:22px}.completion.open{display:flex}.completion-box{max-width:510px}.completion-mark{font-size:60px;color:#e9bd73}.completion h2{font-size:34px;margin:8px}.completion p{font-size:14px;color:#d5ddd4;line-height:1.9}.completion button{background:#d4a85d;border:0;padding:12px 25px;margin-top:12px;cursor:pointer;color:#22352d;font-weight:700}
-@keyframes pulse{50%{box-shadow:0 0 0 12px #ffffff10,0 0 28px #fff9}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:900px){.landing{padding:25px 3vw}.map-layout{grid-template-columns:minmax(0,1fr) 270px}.map-wrap,.map-side{min-height:440px}.trip-stats{gap:11px}.guide{right:3vw;width:280px}.scene-content{left:5vw;bottom:7vh;max-width:45vw}}
-@media(max-width:680px){.topbar{height:60px;padding:0 18px}.top-actions{gap:12px}.progress-line{width:54px}.landing{padding:23px 15px}.intro{align-items:flex-start;display:block}.intro p{max-width:430px}.trip-stats{margin-top:17px}.stat{padding-left:10px}.map-layout{display:flex;flex-direction:column}.map-wrap{min-height:390px;order:0}.map-side{min-height:0;border-left:0;border-top:1px solid var(--line);order:1}.station-list{display:grid;grid-template-columns:1fr 1fr;max-height:205px}.station{padding:9px 5px;grid-template-columns:24px 1fr auto;gap:6px}.station-name{font-size:11px}.selected-card{padding:14px 17px}.footnote{line-height:1.7}.scene-top{padding:17px}.scene-content{left:22px;right:22px;bottom:28px;max-width:none}.scene-content h2{font-size:32px}.scene-content .lead{font-size:12px;max-width:100%}.scene-controls{margin-top:14px}.guide{left:14px;right:14px;bottom:18px;width:auto;padding:15px}.scene.guide-open .scene-content{display:none}.scene.guide-open .scene-top{z-index:1}.hotspot{width:31px;height:31px}.hotspot.h1{left:28%;top:39%}.hotspot.h2{left:61%;top:49%}.hotspot.h3{left:82%;top:31%}}
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #F6F4EE;
+    --paper: #FFFFFF;
+    --ink: #22211E;
+    --ink2: #6B6961;
+    --line: #E4E1D7;
+    --gold: #A9743C;
+    --gold-l: #F3E8D6;
+    --green: #4E7B62;
+    --green-l: #E8F0EA;
+    --plum: #6C5CA8;
+  }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.7;
+    min-height: 100vh;
+  }
+  button { font-family: inherit; cursor: pointer; border: none; }
+
+  /* ---------- 顶栏 ---------- */
+  .top {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 22px; background: rgba(246,244,238,.94);
+    border-bottom: 1px solid var(--line); backdrop-filter: blur(6px);
+  }
+  .brand { font-size: 16px; font-weight: 600; letter-spacing: .5px; }
+  .brand small { font-weight: 400; font-size: 12px; color: var(--ink2); margin-left: 8px; letter-spacing: 0; }
+  .progress { margin-left: auto; font-size: 13px; color: var(--ink2); display: flex; align-items: center; gap: 10px; }
+  .progress b { color: var(--gold); font-weight: 600; }
+  .reset { font-size: 12px; color: var(--ink2); background: none; border: 1px solid var(--line); padding: 5px 12px; border-radius: 14px; }
+  .reset:hover { border-color: var(--ink2); color: var(--ink); }
+
+  .wrap { max-width: 960px; margin: 0 auto; padding: 26px 22px 60px; }
+  .screen { display: none; animation: fade .28s ease; }
+  .screen.on { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- 第一层：地图 ---------- */
+  .maphead { text-align: center; margin-bottom: 18px; }
+  .maphead h1 { font-size: 21px; font-weight: 600; letter-spacing: 1px; }
+  .maphead p { font-size: 13px; color: var(--ink2); margin-top: 6px; }
+
+  .mapbox {
+    position: relative; height: 430px; border-radius: 14px;
+    background: #FBF9F3; border: 1px solid var(--line);
+    background-image:
+      linear-gradient(#EDE9DE 1px, transparent 1px),
+      linear-gradient(90deg, #EDE9DE 1px, transparent 1px);
+    background-size: 44px 44px;
+    overflow: hidden;
+  }
+  .region {
+    position: absolute; font-size: 12px; color: #C9C4B4; letter-spacing: 4px;
+    user-select: none; pointer-events: none;
+  }
+  .dot {
+    position: absolute; transform: translate(-50%, -50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    background: none; padding: 0;
+  }
+  .dot i {
+    display: block; width: 15px; height: 15px; border-radius: 50%;
+    background: #FFFFFF; border: 2px solid var(--gold);
+    transition: all .25s;
+  }
+  .dot span { font-size: 11.5px; color: var(--ink2); white-space: nowrap; transition: color .25s; }
+  .dot:hover i { transform: scale(1.35); }
+  .dot:hover span { color: var(--ink); }
+  .dot.lit i { background: var(--gold); box-shadow: 0 0 0 5px rgba(169,116,60,.16); }
+  .dot.lit span { color: var(--gold); font-weight: 600; }
+  .mapnote { margin-top: 12px; font-size: 11.5px; color: #9C988A; text-align: center; }
+
+  /* ---------- 第二层：详情 ---------- */
+  .back { font-size: 13px; color: var(--ink2); background: none; padding: 4px 0; margin-bottom: 16px; }
+  .back:hover { color: var(--ink); }
+  .dtitle { font-size: 24px; font-weight: 600; letter-spacing: .5px; }
+  .dsub { font-size: 13px; color: var(--gold); margin-top: 6px; letter-spacing: 1px; }
+  .dintro { font-size: 15px; color: #3B3934; margin-top: 16px; line-height: 1.9; max-width: 620px; }
+
+  .costume { margin-top: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); padding: 20px 22px; display: flex; gap: 22px; align-items: center; }
+  .costume .fig {
+    width: 96px; height: 116px; flex: none; border-radius: 10px;
+    background: var(--gold-l); position: relative; overflow: hidden;
+  }
+  .costume .fig::before {
+    content: ""; position: absolute; left: 50%; top: 16px; width: 26px; height: 26px;
+    margin-left: -13px; border-radius: 50%; background: #C8A276;
+  }
+  .costume .fig::after {
+    content: ""; position: absolute; left: 50%; top: 46px; width: 54px; height: 58px;
+    margin-left: -27px; border-radius: 22px 22px 6px 6px; background: #B98A5E;
+    box-shadow: inset 0 14px 0 #E9C77E, inset 0 26px 0 #8F5B45;
+  }
+  .costume h3 { font-size: 15px; font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 9px 0 8px; }
+  .chips em { font-style: normal; font-size: 12px; background: #F6F2E8; border: 1px solid #EADFC8; color: #6B5330; padding: 3px 10px; border-radius: 12px; }
+  .costume p { font-size: 12.5px; color: var(--ink2); }
+
+  .actions { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+  .btn {
+    font-size: 14px; padding: 12px 26px; border-radius: 24px; background: var(--gold); color: #fff;
+    letter-spacing: .5px; transition: .2s;
+  }
+  .btn:hover { background: #8F5F2E; }
+  .btn.ghost { background: none; color: var(--ink2); border: 1px solid var(--line); }
+  .btn.ghost:hover { border-color: var(--ink2); color: var(--ink); background: none; }
+
+  /* ---------- 第二层：迁徙与融合 ---------- */
+  .sec { margin-top: 26px; }
+  .sec-h { font-size: 13px; color: var(--ink2); letter-spacing: 1.5px; margin-bottom: 12px; }
+  .video {
+    position: relative; height: 190px; border-radius: 12px; background: #2C2A26;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .video .play { width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.5); color: #fff; font-size: 16px; }
+  .video .cap { position: absolute; left: 20px; bottom: 16px; right: 20px; color: #E8E4DA; font-size: 13px; }
+  .sandbox { border: 1px solid var(--line); border-radius: 12px; background: var(--paper); padding: 16px; }
+  .sandbox svg { display: block; width: 100%; height: 180px; }
+  .sandbox .cap2 { font-size: 12.5px; color: var(--ink2); margin-top: 8px; text-align: center; }
+  .comic { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .panel { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .panel .pic { height: 96px; background: #F2EEE3; position: relative; }
+  .panel .pic::before { content: ""; position: absolute; left: 16px; right: 16px; bottom: 14px; height: 34px; background: #D9CBB2; border-radius: 4px; }
+  .panel .pic::after { content: ""; position: absolute; left: 28px; top: 18px; width: 22px; height: 22px; border-radius: 50%; background: #C8A276; }
+  .panel .txt { padding: 12px 14px; font-size: 12.5px; color: #4A4842; line-height: 1.65; }
+  .panel .num { font-size: 11px; color: var(--gold); letter-spacing: 1px; }
+
+  /* ---------- 第三层：第一人称沉浸 ---------- */
+  .scene {
+    position: relative; height: 520px; border-radius: 14px; overflow: hidden;
+    background: #EFEAE0; cursor: crosshair;
+  }
+  .layer { position: absolute; inset: -8% -8%; transition: transform .18s ease-out; will-change: transform; }
+  .l-far { background: #E3E9E2; }
+  .l-far .hill { position: absolute; border-radius: 50% 50% 0 0; background: #D2DDD2; }
+  .l-mid { background: transparent; }
+  .l-mid .house { position: absolute; background: #C6B79B; border-radius: 3px 3px 0 0; }
+  .l-mid .roof { position: absolute; width: 0; height: 0; border-left: 34px solid transparent; border-right: 34px solid transparent; border-bottom: 24px solid #A98D66; }
+  .l-near { background: transparent; }
+  .l-near .ground { position: absolute; left: -10%; right: -10%; bottom: -10%; height: 42%; background: #B9C6B2; border-radius: 46% 46% 0 0; }
+  .l-near .grass { position: absolute; bottom: 24%; width: 3px; height: 26px; background: #8FA383; border-radius: 2px; }
+  .vignette { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 90px rgba(60,55,45,.22); }
+  .reticle { position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: rgba(255,255,255,.7); pointer-events: none; }
+
+  .hotspot {
+    position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
+    background: rgba(255,255,255,.78); border: 1.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--gold);
+    animation: pulse 2s infinite; opacity: 0; pointer-events: none; transition: opacity .4s;
+  }
+  .hotspot.show { opacity: 1; pointer-events: auto; }
+  .hotspot.done { background: var(--gold); color: #fff; animation: none; opacity: .85; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(169,116,60,.35); } 50% { box-shadow: 0 0 0 9px rgba(169,116,60,0); } }
+
+  .npcbar { position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; align-items: flex-end; gap: 14px; }
+  .npc {
+    width: 52px; height: 52px; flex: none; border-radius: 50%;
+    background: radial-gradient(circle at 34% 30%, #F6C9A8, #A93F26 72%);
+    box-shadow: 0 0 0 4px rgba(255,255,255,.55), 0 0 0 9px rgba(169,116,60,.16);
+    position: relative; animation: breathe 3.2s ease-in-out infinite;
+  }
+  .npc::after { content: ""; position: absolute; left: 50%; top: 30%; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: rgba(255,255,255,.85); }
+  @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+  .bubble {
+    flex: 1; background: rgba(255,255,255,.96); border-radius: 14px; padding: 16px 20px 14px;
+    border: 1px solid rgba(0,0,0,.05);
+  }
+  .bubble .who { font-size: 11px; color: var(--gold); letter-spacing: 1.5px; margin-bottom: 4px; }
+  .bubble .say { font-size: 14.5px; line-height: 1.7; color: #2B2A26; min-height: 44px; }
+  .bubble .foot { display: flex; justify-content: flex-end; margin-top: 6px; }
+  .bubble .next { font-size: 12.5px; color: #fff; background: var(--gold); padding: 6px 18px; border-radius: 16px; }
+
+  .tipcard {
+    position: absolute; left: 50%; top: 26px; transform: translateX(-50%);
+    width: min(400px, calc(100% - 48px)); background: rgba(255,255,255,.97); border-radius: 12px;
+    padding: 16px 20px; box-shadow: 0 8px 30px rgba(0,0,0,.12); display: none;
+  }
+  .tipcard.on { display: block; }
+  .tipcard h4 { font-size: 13.5px; font-weight: 600; color: var(--gold); margin-bottom: 6px; }
+  .tipcard p { font-size: 13px; color: #3B3934; line-height: 1.7; }
+
+  /* ---------- 答题 ---------- */
+  .modal { position: fixed; inset: 0; background: rgba(30,28,24,.42); display: none; align-items: center; justify-content: center; padding: 24px; z-index: 100; }
+  .modal.on { display: flex; }
+  .card { background: var(--paper); border-radius: 16px; padding: 30px 32px; width: min(480px, 100%); }
+  .card .kicker { font-size: 11px; letter-spacing: 2px; color: var(--gold); }
+  .card h3 { font-size: 17px; font-weight: 600; margin: 10px 0 18px; line-height: 1.6; }
+  .opt {
+    display: block; width: 100%; text-align: left; font-size: 14px; line-height: 1.6;
+    padding: 14px 18px; border: 1px solid var(--line); border-radius: 10px; background: #FCFBF7;
+    margin-bottom: 10px; color: #2E2C28; transition: .18s;
+  }
+  .opt:hover { border-color: var(--gold); background: #FBF6EC; }
+  .opt.right { border-color: var(--green); background: var(--green-l); }
+  .opt.wrong { border-color: #C46A5A; background: #FAEDEA; }
+  .fb { font-size: 13px; color: var(--ink2); line-height: 1.7; margin-top: 8px; display: none; }
+  .fb.on { display: block; }
+  .fb b { color: var(--green); }
+
+  .done { text-align: center; padding: 60px 20px; }
+  .done h2 { font-size: 22px; font-weight: 600; }
+  .done p { font-size: 14px; color: var(--ink2); margin-top: 12px; }
+
+  @media (max-width: 720px) {
+    .mapbox { height: 380px; }
+    .comic { grid-template-columns: 1fr; }
+    .scene { height: 440px; }
+    .costume { flex-direction: column; align-items: flex-start; }
+    .npcbar { left: 14px; right: 14px; }
+    .bubble .say { font-size: 13.5px; }
+  }
 </style>
 </head>
 <body>
-<div class="app" id="app">
-  <header class="topbar"><div class="brand"><div class="brand-mark">籽</div><div>石榴籽足迹<small>一场民族交融现场之旅</small></div></div><div class="top-actions"><div class="progress-mini"><span id="topProgress">0 / 12 已点亮</span><span class="progress-line"><i id="progressFill" style="width:0%"></i></span></div><button class="sound-btn" id="soundToggle" title="声音开关" aria-label="声音开关">♫</button></div></header>
-  <main class="landing"><div class="intro"><div><div class="kicker">FIELD NOTES · CHINA</div><h1>沿着交融的足迹，<br>走进共同的家园。</h1><p>十二处真实现场，十二段相遇的故事。点亮每一站，完成这趟旅程。</p></div><div class="trip-stats"><div class="stat"><b>12</b><span>处交融现场</span></div><div class="stat"><b id="litCount">0</b><span>已点亮</span></div><div class="stat"><b>∞</b><span>共同的记忆</span></div></div></div>
-    <section class="map-layout"><div class="map-wrap"><div class="map-compass"><b>北 ↑</b>东经 · 北纬</div><svg id="chinaMap" viewBox="0 0 900 590" role="img" aria-label="中国地图与十二处旅程点位"></svg><div class="map-note">● 旅程站点　·　点击光点或右侧站名进入现场</div></div><aside class="map-side"><div class="side-head"><div class="side-headline"><h2>旅程站点</h2><span>12 个现场</span></div><p>从山川古道，到街巷家园</p></div><div class="station-list" id="stationList"></div><div class="selected-card" id="selectedCard"></div></aside></section>
-    <div class="footnote"><span>《石榴籽足迹》· 项目体验原型</span><span>旅程进度保存在此浏览器</span></div>
-  </main>
+
+<div class="top">
+  <div class="brand">石榴籽足迹<small>交互原型 · 三层内容</small></div>
+  <div class="progress"><span>已点亮 <b id="pg">0</b> / <span id="tt">8</span></span><button class="reset" onclick="resetAll()">重置</button></div>
 </div>
-<section class="scene" id="scene" aria-hidden="true"><div class="scene-landscape" id="landscape"><div class="scene-bg" id="sceneBg"></div><div class="scene-grain"></div><div class="scene-vignette"></div></div><button class="hotspot h1" data-clue="0" aria-label="查看古道线索"></button><button class="hotspot h2" data-clue="1" aria-label="查看生活线索"></button><button class="hotspot h3" data-clue="2" aria-label="查看交融线索"></button><div class="clue-pop" id="cluePop"><button id="closeClue" aria-label="关闭">×</button><div class="kicker">现场线索</div><h3 id="clueTitle"></h3><p id="clueText"></p></div><div class="scene-top"><button class="back" id="backButton">← 返回地图</button><div class="scene-counter" id="sceneCounter"></div></div><div class="scene-content" id="sceneContent"></div><div class="guide" id="guide"><div class="guide-head"><div class="guide-avatar">籽</div><div><b>阿籽 · 你的旅途向导</b><small id="guideStep">现场讲述</small></div></div><p class="guide-text" id="guideText"></p><button class="guide-next" id="guideNext">继续听阿籽讲</button></div><div class="quiz" id="quiz"><div class="quiz-box"><div class="quiz-label">抵达一站 · 回答点亮</div><h3 id="quizQuestion"></h3><div class="answers" id="answers"></div><div class="quiz-feedback" id="quizFeedback"></div><div class="quiz-actions"><button class="quiet" id="quizClose">再看看现场</button></div></div></div></section>
-<section class="completion" id="completion"><div class="completion-box"><div class="completion-mark">✳</div><div class="kicker">旅程完成</div><h2>十二颗籽，紧紧相依</h2><p>你走过山川、古道与街巷，也看见不同生活如何在往来相遇中彼此照亮。<br>共同的家园，由一次次真实的相逢构成。</p><button id="finishButton">回到地图，再走一遍</button></div></section>
+
+<div class="wrap">
+
+  <!-- ========== 第一层：地图 ========== -->
+  <section id="s-map" class="screen on">
+    <div class="maphead">
+      <h1>点一张地图，走进十二个地方</h1>
+      <p>点亮一个点，看那里的服饰、走过那里的路、听那里的故事</p>
+    </div>
+    <div class="mapbox" id="map"></div>
+    <p class="mapnote">示意布局，用于原型演示。正式版须使用自然资源部标准地图底图（含审图号）。</p>
+  </section>
+
+  <!-- ========== 第一层：详情 ========== -->
+  <section id="s-detail" class="screen">
+    <button class="back" onclick="go('s-map')">← 返回地图</button>
+    <div class="dtitle" id="d-name"></div>
+    <div class="dsub" id="d-theme"></div>
+    <p class="dintro" id="d-intro"></p>
+    <div class="costume" id="d-costume"></div>
+    <div class="actions">
+      <button class="btn" onclick="startImmersive()">进入第一人称体验 →</button>
+      <button class="btn ghost" onclick="openHistory()">看迁徙与融合</button>
+    </div>
+  </section>
+
+  <!-- ========== 第二层：迁徙与融合 ========== -->
+  <section id="s-history" class="screen">
+    <button class="back" onclick="go('s-detail')">← 返回</button>
+    <div class="dtitle" id="h-name"></div>
+    <div class="dsub">迁徙与融合 · 一段历史，三种讲法</div>
+
+    <div class="sec">
+      <div class="sec-h">其一 · 影像</div>
+      <div class="video">
+        <button class="play" onclick="toast('视频为占位，正式版替换为 2–3 分钟短片')">▶</button>
+        <div class="cap" id="h-video"></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">其二 · 数字沙盘</div>
+      <div class="sandbox">
+        <svg id="h-sand" viewBox="0 0 340 180" preserveAspectRatio="none"></svg>
+        <p class="cap2" id="h-sandcap"></p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">其三 · 漫画</div>
+      <div class="comic" id="h-comic"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="startImmersive()">进入第一人称体验 →</button>
+    </div>
+  </section>
+
+  <!-- ========== 第三层：第一人称 ========== -->
+  <section id="s-imm" class="screen">
+    <button class="back" onclick="go('s-detail')" style="margin-bottom:12px">← 退出体验</button>
+    <div class="scene" id="scene">
+      <div class="layer l-far" id="l-far">
+        <div class="hill" style="left:4%; top:34%; width:56%; height:70%"></div>
+        <div class="hill" style="left:44%; top:22%; width:64%; height:82%"></div>
+      </div>
+      <div class="layer l-mid" id="l-mid">
+        <div class="house" style="left:16%; top:52%; width:70px; height:56px"></div>
+        <div class="roof" style="left:14%; top:40%"></div>
+        <div class="house" style="left:62%; top:56%; width:56px; height:48px"></div>
+        <div class="roof" style="left:60%; top:45%; border-left-width:30px; border-right-width:30px"></div>
+      </div>
+      <div class="layer l-near" id="l-near">
+        <div class="ground"></div>
+        <div class="grass" style="left:14%"></div>
+        <div class="grass" style="left:22%; height:34px"></div>
+        <div class="grass" style="left:70%"></div>
+        <div class="grass" style="left:82%; height:30px"></div>
+      </div>
+      <div class="vignette"></div>
+      <div class="reticle"></div>
+      <div class="tipcard" id="tip"><h4></h4><p></p></div>
+      <div class="npcbar">
+        <div class="npc"></div>
+        <div class="bubble">
+          <div class="who">阿籽 · 向导</div>
+          <div class="say" id="say"></div>
+          <div class="foot"><button class="next" id="nextBtn" onclick="nextLine()">下一句</button></div>
+        </div>
+      </div>
+    </div>
+    <p class="mapnote" style="margin-top:10px">移动鼠标或手指，画面会产生纵深变化 · 讲解结束后点亮场景里的圆圈</p>
+  </section>
+
+  <!-- ========== 完成 ========== -->
+  <section id="s-done" class="screen">
+    <div class="done">
+      <h2>十二点尚未集满，先把这一处走完</h2>
+      <p>回到地图，继续点亮其他地方。</p>
+      <div class="actions" style="justify-content:center"><button class="btn" onclick="go('s-map')">回到地图</button></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- 答题弹层 -->
+<div class="modal" id="modal">
+  <div class="card">
+    <div class="kicker">点睛一问</div>
+    <h3 id="q-text"></h3>
+    <div id="q-opts"></div>
+    <div class="fb" id="q-fb"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
 <script>
-const places=[
-{name:"茶马古道",place:"云南 · 滇藏线",lat:25.04,lng:101.5,tag:"山路相逢",desc:"马帮铃声穿过山谷，茶叶、盐巴与故事沿路流动。",story:["你听见远处的马铃了吗？从前，马帮沿着山路运茶、运盐，也把各地的手艺和消息带到下一座村寨。","路上的相遇并不只发生在集市。赶路人互相照应，村寨为过客留一碗热茶，久而久之，陌生人也成了熟面孔。","当物品跟着人走，语言、歌谣和生活习惯也会彼此靠近。古道把相隔的地方，连成了日常往来的网络。"],clues:[["古道与马帮","崎岖山路连接村寨与集市。马帮按季节往来，带去茶叶、盐和日用品，也带回沿途见闻。"],["一碗热茶","旅途中歇脚、换马、补给都离不开沿途人家的照应。待客的习惯，让远行者和本地人建立信任。"],["路上的新朋友","商贸往来让不同地方的人反复相遇。物品之外，技艺、词语和生活经验也在一次次交往中传播。"]],question:"茶马古道为什么能成为各地人群交往的纽带？",answers:["它让商旅反复往来，带动物品、信息与生活经验交流","它把沿途村寨彼此隔绝起来","它只供一种人群单向通行"],correct:0},
-{name:"河湟村庄",place:"青海 · 河湟谷地",lat:36.62,lng:101.78,tag:"邻里共作",desc:"一条河谷里的村庄，因耕作、集市与邻里互助而紧紧相连。",story:["河水穿过谷地，村庄沿着河岸铺开。不同家庭在这里种地、赶集，孩子在同一条巷子里长大。","农忙时搭把手，节庆时互相串门。许多关系不是从大道理开始，而是从借一把工具、分一篮收成开始。","共同生活让人们慢慢熟悉彼此，也学会在差异中照顾对方。村庄的日常，正是交往交流交融的真实现场。"],clues:[["河谷与田地","河流带来水源，也形成相互连接的聚落。耕作、放牧和集市构成了邻里共同的生活节奏。"],["邻里互助","修渠、收割、照看孩子，许多家务需要邻居相互帮忙。共同做事，让彼此的生活紧密相连。"],["集市日","赶集的人带来不同的货物与消息。集市既交换物品，也让邻里之外的人建立联系。"]],question:"村庄里的交融，最常从哪里发生？",answers:["在共同劳动、邻里互助和日常往来中","只在远离生活的仪式里","因为大家都放弃了自己的生活习惯"],correct:0},
-{name:"伊犁老街",place:"新疆 · 伊犁河谷",lat:43.92,lng:81.32,tag:"街巷共生",desc:"一条老街上，店铺、院落和多种语言交织成鲜活日常。",story:["老街醒得很早。面包刚出炉，果摊摆上新鲜的瓜果，邻居隔着门招呼彼此。","沿街做生意的人熟悉彼此的口味和作息。谁家有喜事，街坊会来帮忙；谁家远行，邻居也替他照看店面。","不同的饮食和语言留在街巷里，同时生长出共同的邻里情谊。这条街的故事，写在每天的相遇里。"],clues:[["街巷商铺","老街是生活与贸易交汇的地方。日常买卖让不同家庭持续见面、熟悉并合作。"],["邻里招呼","街坊之间互相问候、照看铺面与孩子。熟悉感来自日积月累的共同生活。"],["共享的节日","节庆习俗各有特色，街坊也会分享食物、祝福与喜悦。尊重差异与共同参与可以同时发生。"]],question:"老街里的共同家园感，怎样形成？",answers:["靠街坊间持续的日常交往与互相照应","靠所有店铺售卖同一种商品","靠彼此不来往来保持距离"],correct:0},
-{name:"晴隆彝族舞场",place:"贵州 · 黔西南",lat:25.83,lng:105.22,tag:"歌舞相和",desc:"火把映亮舞场，人们围着歌声与节拍相聚。",story:["鼓点响起来，人们从四面八方走进舞场。火光把一张张笑脸照亮，脚步也渐渐合成同一个节拍。","每个舞步都有来处。长辈把曲调教给年轻人，邻近村寨的人带来新的旋律，大家在围圈起舞时记住彼此。","文化因为传承而鲜活，也因为交流而丰富。共同参与，让舞场成为一处共享的记忆。"],clues:[["火把与舞场","火把节期间，人们相聚、歌唱和起舞。舞场是传承文化、联络情谊的公共空间。"],["一支曲调","曲调和舞步由长辈传给年轻人，也会在交往中吸收新的表达方式。"],["围圈起舞","围圈让每个人都能加入。共同的节拍不抹去各自身份，却让参与者建立情感连接。"]],question:"围圈共舞带来的意义是什么？",answers:["人们共同参与，在文化传承中建立情感连接","所有舞者必须跳成完全相同的舞步","舞蹈只属于旁观者"],correct:0},
-{name:"玉麦守边人家",place:"西藏 · 山南隆子",lat:28.87,lng:92.28,tag:"家国相守",desc:"雪山脚下的守边家庭，把对家园的守护写进日常。",story:["雪山围着小小的村庄。清晨，人们整理屋前的道路，照料牲畜，也为远道来访的人备好热茶。","这里的生活和边境守护连在一起。巡边、护林、照顾邻里，都需要一家人和村里人彼此支撑。","守护家园的心意，让不同地方的人产生共同的牵挂。家园并不遥远，它就在每个人认真生活、彼此守望的地方。"],clues:[["雪山村落","村庄地处高山边境，交通与生活条件都需要共同应对。"],["屋前的日常","修路、护林、照顾牲畜，守护家园常常从这些看似平常的小事开始。"],["一起守望","守边工作需要家庭、邻里和各方力量协同。共同责任让人们与更广阔的家园相连。"]],question:"守护家园如何连接起不同的人？",answers:["共同的责任和彼此支持，让大家与家园产生共同牵挂","只有住在村里的人才与家园有关","守护意味着不需要邻里合作"],correct:0},
-{name:"闽宁协作新村",place:"宁夏 · 永宁县",lat:38.28,lng:106.05,tag:"山海协作",desc:"来自山海两端的人们并肩建设新生活，让曾经的荒滩长出希望。",story:["风从贺兰山吹来，新村的道路两旁已经种起葡萄。许多家庭从远方搬来，在这里重新安顿生活。","技术人员、基层干部和村民一起修渠、建棚、学种植。经验从一双手传到另一双手，慢慢变成可以持续的生计。","协作不只是资源的抵达，也是人与人共同劳动、共享发展的过程。新村的变化，来自许多人的携手。"],clues:[["新村街道","搬迁群众在这里建设新家园。村庄道路、学校与公共服务让生活逐步安稳。"],["葡萄藤架","农业技术与当地条件结合，帮助村民发展产业。经验需要一起学习、试种和改进。"],["携手协作","来自不同地区的人共同投入，形成互帮互学的关系，共享发展成果。"]],question:"闽宁协作最重要的实践方式是什么？",answers:["不同地区的人共同建设、互相学习并共享发展成果","由一方完成全部工作，另一方只接受帮助","发展只能依靠单一资源"],correct:0},
-{name:"三江侗寨",place:"广西 · 柳州三江",lat:25.78,lng:109.6,tag:"鼓楼相聚",desc:"鼓楼下议事、唱歌、迎客，村寨的共同生活在这里展开。",story:["鼓楼是村寨的中心。有人在这里歇脚，有人在这里商量公共事务，节日时歌声从木楼里传向远处。","修桥、接待客人、准备节庆，寨里人常常一起动手。邻近村寨也会带着歌队和手艺来往。","共同的公共空间让人们相聚、商量、分享。文化在这里被珍惜，也在交往中被更多人理解。"],clues:[["木构鼓楼","鼓楼是村寨重要的公共空间，兼有议事、集会和交往功能。"],["侗族大歌","多声部歌唱需要彼此聆听与配合，是集体记忆和合作精神的表达。"],["迎客与共建","村寨通过共同劳动维护公共空间，也以歌与礼迎接远方来客。"]],question:"鼓楼作为公共空间，发挥了什么作用？",answers:["让村民聚集议事、交流、传承文化","只用于存放农具，不参与村寨生活","隔开不同村寨之间的来往"],correct:0},
-{name:"景迈山古茶林",place:"云南 · 普洱澜沧",lat:22.18,lng:100.05,tag:"茶山共护",desc:"千年茶林与村寨相依，人与自然的相处方式代代相传。",story:["雾从茶林间升起来。古茶树旁，村民按着世代传下来的方式采茶、养护林地。","不同民族的村寨共同生活在这片山地。茶叶让他们与外部市场相连，茶林也承载着对山林的共同敬意。","照料茶树需要耐心，守护山林需要协作。共同的生态家园，让人们在长期相处中结下深厚联系。"],clues:[["古茶树","人工栽培与自然林地交错，体现了长期形成的人与山林和谐相处方式。"],["采茶与制茶","采收、加工和分享茶叶是村寨生活的一部分，也联系着更广阔的贸易网络。"],["共同护林","保护茶林关系到每个家庭的生活。村寨共同遵守约定，守护共享的生态资源。"]],question:"共同护林为何能增强村寨之间的联系？",answers:["大家依赖同一片生态家园，需要协作维护","山林只属于某一个家庭","护林与村民生活没有关系"],correct:0},
-{name:"西安回民街",place:"陕西 · 西安",lat:34.26,lng:108.94,tag:"市井交往",desc:"香气、叫卖声和街坊故事汇成一条城市生活的长街。",story:["石板路上香气四溢，店主忙着招呼熟客，也迎接从远方来的游客。","这条街历经许多代人的经营与生活。不同饮食传统留在这里，人们也在买卖、问路和分享中彼此熟悉。","城市里的共同生活，是在尊重各自习惯的基础上，一起创造可亲近、可分享的公共空间。"],clues:[["街边食铺","饮食是地方文化的窗口。店铺承载着手艺、记忆与人们的日常往来。"],["老字号招牌","代代相传的经营方式连接过去与现在，也让街坊和游客认识这座城市。"],["街头相遇","买卖、问路、品尝和聊天，让来自不同地方的人共享一段城市生活。"]],question:"一条城市老街如何成为交往空间？",answers:["在日常买卖、分享与相互熟悉中形成公共生活","把不同饮食传统都从街上移走","只允许本地人使用街道"],correct:0},
-{name:"那达慕草原",place:"内蒙古 · 锡林郭勒",lat:43.93,lng:116.07,tag:"草原盛会",desc:"草原盛会让牧民、亲友和来客在赛马、歌声与欢聚中相识。",story:["草原上搭起彩色的旗幡，远处的马蹄声越来越近。那达慕到了，牧民和来客从各处汇聚而来。","赛马、摔跤、射箭和歌唱，是分享技艺与喜悦的方式。人们围在一起观赛、交谈、交换近况。","盛会把平常分散的生活连接起来。每一次相聚，都让彼此的文化和情谊多一层理解。"],clues:[["草原会场","那达慕是群众性传统节庆活动，为不同地方的人提供相聚与交流的机会。"],["赛马与摔跤","传统体育展示技艺，也凝聚参与者和观众的共同热情。"],["长调与祝酒","歌声与待客礼仪表达祝福。分享喜悦让节庆记忆成为共同记忆。"]],question:"传统节庆如何促进不同人群相识？",answers:["人们共同参与、观看和分享节庆活动","节庆只让人待在各自家中","节庆的目的在于阻止外来者参与"],correct:0},
-{name:"喀什古城",place:"新疆 · 喀什",lat:39.47,lng:75.99,tag:"古城往来",desc:"巷道与巴扎连接家庭、手艺和远道而来的商旅。",story:["古城巷子里传来敲打铜器的声音。巴扎上，香料、果干、织物和器皿摆满摊位。","手艺人守着店铺，也会把技艺教给家人和学徒。来往的商旅带来新的花样，老街坊则把自己的故事讲给客人听。","古城的活力来自流动与相守：人们欢迎往来，也把家园的记忆一代代留在街巷里。"],clues:[["巴扎集市","集市连接本地生产者与远方商旅，是长期贸易往来的重要空间。"],["手工艺铺","传统技艺通过家庭与师徒传承，也会回应不同地区的审美与需求。"],["巷道与院落","巷道让邻里相遇，院落承载家庭生活，二者共同构成古城的日常空间。"]],question:"喀什古城长期保持活力的重要原因是什么？",answers:["街巷生活与对外往来相互连接","古城完全停止了贸易和交流","所有手艺都不再传承"],correct:0},
-{name:"广州十三行",place:"广东 · 广州",lat:23.12,lng:113.26,tag:"海上通途",desc:"珠江边的商埠见证着中国与世界的商品、技艺和知识往来。",story:["珠江水面上，商船驶进港口。货物从船舱卸下，也有远道而来的语言、器物和消息上岸。","在商馆和作坊里，商人、翻译、工匠和水手各自忙碌。一次次沟通，让不同文化的人学着理解彼此的规则。","交流会带来新的机会，也需要平等、互信与彼此尊重。沿海商埠让我们看见，开放往来一直是中华文明的重要经验。"],clues:[["珠江港口","广州港是海上贸易的重要节点，长期连接国内外航路。"],["商馆与译员","跨语言交往需要翻译、协商与熟悉规则，交流由许多具体的人完成。"],["货物与技艺","器物、技术和知识随贸易流动，也在本地被重新理解和创造。"]],question:"历史上的商埠交流包含哪些内容？",answers:["商品往来，也包括语言、技艺和知识交流","只有货物移动，人们完全没有接触","交流只会单向发生"],correct:0}
-];
-const outline=[[73.5,39.5],[75.2,40.5],[76.5,41],[80.2,42.2],[82.6,45],[85,47],[87.3,49.2],[90,48],[91,46.5],[96,44],[101,42.5],[105,41.8],[110,42.5],[111.5,43.5],[116,45],[119.5,46.5],[121.5,49.5],[124,51.5],[126.5,50],[128.5,53],[131,48],[133.5,48.5],[135,48.5],[134.5,45],[131,44.8],[130,42.5],[129.5,40],[127,39.5],[125,39],[124,40],[121.5,40.8],[122.5,39.5],[121,38.5],[122.8,37.4],[120.5,36],[119,35],[121.5,32],[122,30.5],[120.5,28],[119,26],[118,24.5],[116.5,23],[113.5,22.5],[110.5,21.5],[109.5,20.2],[108,21.5],[106.5,22.5],[105,23],[102,22.5],[100,21.5],[99,22],[97.5,24],[97.5,27.5],[95,28],[92,27.8],[89,27.5],[88,28],[85,28.5],[81,30.2],[79,32.5],[78,34.5],[76,36],[74.5,37.5],[73.5,39.5]],hainan=[[109,20.2],[110.5,20],[111,19.6],[110,18.2],[108.7,19.3]];
-const proj=(lng,lat)=>[65+(lng-72)/64*770,35+(54-lat)/38*515];const svg=document.getElementById('chinaMap');const pt=p=>{const [x,y]=proj(...p);return `${x.toFixed(1)},${y.toFixed(1)}`};const path=arr=>'M'+arr.map(pt).join('L')+'Z';
-function drawMap(){let html='<defs><radialGradient id="pinGlow"><stop offset="0" stop-color="#c7523c" stop-opacity=".22"/><stop offset="1" stop-color="#c7523c" stop-opacity="0"/></radialGradient></defs><g stroke="#d9d5c9" stroke-width=".7" opacity=".7">';for(let l=75;l<=135;l+=10){const[x]=proj(l,0);html+=`<line x1="${x}" y1="35" x2="${x}" y2="550"/>`}for(let l=20;l<=50;l+=10){const[,y]=proj(0,l);html+=`<line x1="65" y1="${y}" x2="835" y2="${y}"/>`}html+='</g>';html+=`<path class="map-land" d="${path(outline)}"/><path class="map-island" d="${path(hainan)}"/>`;html+='<path class="route" id="routePath" d=""/>';const hubs=[["西北",39,88],["华北",40,114],["西南",27,101],["华东",31,119],["华南",23,111]];hubs.forEach(([n,lat,lng])=>{let[x,y]=proj(lng,lat);html+=`<text class="map-label" x="${x}" y="${y}" text-anchor="middle">${n}</text>`});places.forEach((p,i)=>{const[x,y]=proj(p.lng,p.lat);html+=`<g class="marker" data-index="${i}" transform="translate(${x} ${y})" role="button" tabindex="0" aria-label="第${i+1}站 ${p.name}"><circle class="halo" r="17" fill="url(#pinGlow)"/><circle class="core" r="8"/><text class="num" y=".5">${i+1}</text></g>`});svg.innerHTML=html;const d=places.map(p=>pt([p.lng,p.lat])).join(' L');document.getElementById('routePath').setAttribute('d','M'+d)}
-function loadProgress(){try{return JSON.parse(localStorage.getItem('pomegranate-lit')||'[]')}catch{return []}}function saveProgress(){try{localStorage.setItem('pomegranate-lit',JSON.stringify([...lit]))}catch{}}
-let current=0,lit=new Set(loadProgress()),guidePage=0,answerLocked=false;const list=document.getElementById('stationList');
-function drawList(){list.innerHTML=places.map((p,i)=>`<button class="station ${i===current?'active':''} ${lit.has(i)?'done':''}" data-index="${i}"><span class="station-num">${String(i+1).padStart(2,'0')}</span><span><b class="station-name">${p.name}</b><small class="station-place">${p.place}</small></span><span class="station-status">${lit.has(i)?'●':'○'}</span></button>`).join('');document.querySelectorAll('.station').forEach(b=>b.onclick=()=>select(+b.dataset.index));document.querySelectorAll('.marker').forEach(m=>{m.classList.toggle('done',lit.has(+m.dataset.index));m.classList.toggle('selected',+m.dataset.index===current);m.onclick=()=>select(+m.dataset.index);m.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(+m.dataset.index)}}});document.getElementById('litCount').textContent=lit.size;document.getElementById('topProgress').textContent=`${lit.size} / 12 已点亮`;document.getElementById('progressFill').style.width=`${lit.size/12*100}%`;const p=places[current];document.getElementById('selectedCard').innerHTML=`<div class="selected-meta">第 ${String(current+1).padStart(2,'0')} 站 · ${p.tag}</div><h3>${p.name}</h3><p>${p.place}　${p.desc}</p><button class="primary" id="enterPlace">走进现场 <span>→</span></button>`;document.getElementById('enterPlace').onclick=()=>openScene(current)}
-function select(i){current=i;drawList()}
-function openScene(i){current=i;const p=places[i],scene=document.getElementById('scene');scene.classList.add('open');scene.setAttribute('aria-hidden','false');scene.classList.remove('guide-open');document.getElementById('sceneCounter').textContent=`FIELD ${String(i+1).padStart(2,'0')} / 12`;document.getElementById('sceneContent').innerHTML=`<div class="scene-location">${p.place}　·　${p.tag}</div><h2>${p.name}</h2><p class="lead">${p.desc}在这里，跟着阿籽的脚步，看看一段日常如何连起不同的人。</p><div class="scene-controls"><button class="ghost-btn" id="meetGuide">听阿籽讲述</button><button class="ghost-btn" id="startQuiz">完成本站问答　→</button></div>`;document.getElementById('meetGuide').onclick=()=>showGuide(0);document.getElementById('startQuiz').onclick=()=>openQuiz();document.getElementById('guide').classList.remove('show');document.getElementById('cluePop').classList.remove('open');document.querySelectorAll('.hotspot').forEach((h,n)=>h.onclick=()=>showClue(n));if(lit.has(i)){document.querySelector('#startQuiz').textContent='重温本站问答　→'} }
-function showGuide(n){guidePage=n;const p=places[current];document.getElementById('guideText').textContent=p.story[n];document.getElementById('guideStep').textContent=`阿籽的讲述 · ${n+1} / ${p.story.length}`;document.getElementById('guideNext').textContent=n===p.story.length-1?'回答一个小问题 →':'继续听阿籽讲';document.getElementById('guide').classList.add('show');document.getElementById('scene').classList.add('guide-open');document.getElementById('guideNext').onclick=()=>n===p.story.length-1?openQuiz():showGuide(n+1)}
-function showClue(n){const c=places[current].clues[n];document.getElementById('clueTitle').textContent=c[0];document.getElementById('clueText').textContent=c[1];document.getElementById('cluePop').classList.add('open')}
-function openQuiz(){const p=places[current];answerLocked=false;document.getElementById('quizQuestion').textContent=p.question;document.getElementById('quizFeedback').textContent='';document.getElementById('answers').innerHTML=p.answers.map((a,i)=>`<button class="answer" data-answer="${i}">${String.fromCharCode(65+i)}　${a}</button>`).join('');document.getElementById('quiz').classList.add('open');document.getElementById('guide').classList.remove('show');document.getElementById('scene').classList.remove('guide-open');document.querySelectorAll('.answer').forEach(b=>b.onclick=()=>checkAnswer(+b.dataset.answer,b));document.getElementById('quizClose').onclick=()=>document.getElementById('quiz').classList.remove('open')}
-function checkAnswer(i,b){if(answerLocked)return;const p=places[current];if(i===p.correct){answerLocked=true;b.classList.add('correct');document.getElementById('quizFeedback').textContent='答对了，这一站已经点亮。';lit.add(current);saveProgress();drawList();setTimeout(()=>{document.getElementById('quiz').classList.remove('open');if(lit.size===12)document.getElementById('completion').classList.add('open')},850)}else{b.classList.add('wrong');document.getElementById('quizFeedback').textContent='再想一想：观察现场里，人们是怎样相遇和共同生活的？'}}
-document.getElementById('backButton').onclick=()=>{document.getElementById('scene').classList.remove('open');document.getElementById('scene').setAttribute('aria-hidden','true');document.getElementById('quiz').classList.remove('open');document.getElementById('guide').classList.remove('show');document.getElementById('cluePop').classList.remove('open')};document.getElementById('closeClue').onclick=()=>document.getElementById('cluePop').classList.remove('open');document.getElementById('finishButton').onclick=()=>{document.getElementById('completion').classList.remove('open');document.getElementById('backButton').click()};document.getElementById('soundToggle').onclick=e=>{e.currentTarget.style.opacity=e.currentTarget.style.opacity==='0.45'?'1':'.45'};document.getElementById('landscape').addEventListener('pointermove',e=>{const r=e.currentTarget.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;document.getElementById('sceneBg').style.transform=`translate(${x*-16}px,${y*-12}px) scale(1.04)`});drawMap();drawList();
+  var cur = null, lineIdx = 0, seen = 0, lit = [], tips = [];
+  var KEY = 'shiliuzi_lit';
+
+  try { lit = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { lit = []; }
+
+  /* ---------- 通用 ---------- */
+  function go(id) {
+    document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('on'); });
+    document.getElementById(id).classList.add('on');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toast(msg) {
+    var d = document.createElement('div');
+    d.textContent = msg;
+    d.style.cssText = 'position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:#2C2A26;color:#fff;font-size:13px;padding:10px 20px;border-radius:20px;z-index:200;opacity:0;transition:.3s';
+    document.body.appendChild(d);
+    requestAnimationFrame(function () { d.style.opacity = 1; });
+    setTimeout(function () { d.style.opacity = 0; setTimeout(function () { d.remove(); }, 300); }, 2200);
+  }
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(lit)); } catch (e) {} }
+
+  function paintProgress() {
+    document.getElementById('pg').textContent = lit.length;
+    document.getElementById('tt').textContent = NODES.length;
+    document.querySelectorAll('.dot').forEach(function (el) {
+      el.classList.toggle('lit', lit.indexOf(el.dataset.id) > -1);
+    });
+  }
+
+  /* ---------- 地图 ---------- */
+  (function buildMap() {
+    var map = document.getElementById('map');
+    var regions = [
+      { t: '西 北', x: 14, y: 20 }, { t: '华 北', x: 52, y: 18 },
+      { t: '华 东', x: 78, y: 42 }, { t: '西 南', x: 26, y: 84 },
+      { t: '中 南', x: 62, y: 80 }
+    ];
+    regions.forEach(function (r) {
+      var el = document.createElement('div');
+      el.className = 'region';
+      el.textContent = r.t;
+      el.style.left = r.x + '%';
+      el.style.top = r.y + '%';
+      map.appendChild(el);
+    });
+    NODES.forEach(function (n) {
+      var b = document.createElement('button');
+      b.className = 'dot';
+      b.dataset.id = n.id;
+      b.style.left = n.x + '%';
+      b.style.top = n.y + '%';
+      b.innerHTML = '<i></i><span>' + n.name.split(' · ')[1] + '</span>';
+      b.onclick = function () { openNode(n.id); };
+      map.appendChild(b);
+    });
+    paintProgress();
+  })();
+
+  /* ---------- 详情 ---------- */
+  function openNode(id) {
+    cur = NODES.filter(function (n) { return n.id === id; })[0];
+    document.getElementById('d-name').textContent = cur.name;
+    document.getElementById('d-theme').textContent = cur.theme + ' · ' + cur.folk;
+    document.getElementById('d-intro').textContent = cur.intro;
+    var c = cur.costume;
+    document.getElementById('d-costume').innerHTML =
+      '<div class="fig"></div>' +
+      '<div><h3>' + c.title + '</h3>' +
+      '<div class="chips">' + c.items.map(function (i) { return '<em>' + i + '</em>'; }).join('') + '</div>' +
+      '<p>' + c.note + '</p></div>';
+    go('s-detail');
+  }
+
+  /* ---------- 迁徙与融合 ---------- */
+  function openHistory() {
+    document.getElementById('h-name').textContent = cur.name + ' · ' + cur.theme;
+    document.getElementById('h-video').textContent = cur.history.video;
+
+    var pts = cur.history.sandbox.route;
+    var d = 'M' + pts[0][0] * 3.4 + ' ' + pts[0][1] * 1.8;
+    for (var i = 1; i < pts.length; i++) d += ' L' + pts[i][0] * 3.4 + ' ' + pts[i][1] * 1.8;
+    var svg = '<rect x="0" y="0" width="340" height="180" fill="#FBFAF5"/>';
+    svg += '<g stroke="#EDE9DE" stroke-width="0.5">';
+    for (var k = 1; k < 6; k++) svg += '<line x1="0" y1="' + k * 30 + '" x2="340" y2="' + k * 30 + '"/>';
+    for (var j = 1; j < 8; j++) svg += '<line x1="' + j * 42 + '" y1="0" x2="' + j * 42 + '" y2="180"/>';
+    svg += '</g>';
+    svg += '<path d="' + d + '" fill="none" stroke="#B08B4F" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round"/>';
+    pts.forEach(function (p, idx) {
+      svg += '<circle cx="' + p[0] * 3.4 + '" cy="' + p[1] * 1.8 + '" r="' + (idx === 0 ? 6 : 4) + '" fill="' + (idx === 0 ? '#A33F1E' : '#B08B4F') + '"/>';
+    });
+    svg += '<circle r="4" fill="#fff" stroke="#A33F1E" stroke-width="2"><animateMotion dur="6s" repeatCount="indefinite" path="' + d + '"/></circle>';
+    document.getElementById('h-sand').innerHTML = svg;
+    document.getElementById('h-sandcap').textContent = cur.history.sandbox.caption;
+
+    document.getElementById('h-comic').innerHTML = cur.history.comic.map(function (p) {
+      return '<div class="panel"><div class="pic"></div><div class="txt"><span class="num">' + p.t + '</span><br>' + p.d + '</div></div>';
+    }).join('');
+
+    go('s-history');
+  }
+
+  /* ---------- 第一人称 ---------- */
+  function startImmersive() {
+    lineIdx = 0; seen = 0;
+    document.getElementById('tip').classList.remove('on');
+    document.querySelectorAll('.hotspot').forEach(function (h) { h.remove(); });
+    document.getElementById('nextBtn').style.display = '';
+    document.getElementById('say').textContent = cur.dialogue[0];
+    go('s-imm');
+  }
+
+  function nextLine() {
+    lineIdx++;
+    if (lineIdx < cur.dialogue.length) {
+      document.getElementById('say').textContent = cur.dialogue[lineIdx];
+      if (lineIdx === cur.dialogue.length - 1) document.getElementById('nextBtn').textContent = '开始探索';
+    } else {
+      document.getElementById('nextBtn').style.display = 'none';
+      document.getElementById('say').textContent = '场景里三个圆圈，点开看看。全部看过之后，我再问你一个问题。';
+      spawnHotspots();
+    }
+  }
+
+  function spawnHotspots() {
+    var scene = document.getElementById('scene');
+    cur.hotspots.forEach(function (h, i) {
+      var el = document.createElement('button');
+      el.className = 'hotspot show';
+      el.textContent = i + 1;
+      el.style.left = h.x + '%';
+      el.style.top = h.y + '%';
+      el.onclick = function () {
+        if (!el.classList.contains('done')) { el.classList.add('done'); seen++; }
+        var tip = document.getElementById('tip');
+        tip.querySelector('h4').textContent = h.title;
+        tip.querySelector('p').textContent = h.text;
+        tip.classList.add('on');
+        setTimeout(function () { tip.classList.remove('on'); }, 3800);
+        if (seen === cur.hotspots.length) setTimeout(showQuiz, 1200);
+      };
+      scene.appendChild(el);
+    });
+  }
+
+  /* ---------- 答题 ---------- */
+  function showQuiz() {
+    var q = cur.quiz;
+    document.getElementById('q-text').textContent = q.q;
+    document.getElementById('q-fb').classList.remove('on');
+    document.getElementById('q-opts').innerHTML = q.opts.map(function (o, i) {
+      return '<button class="opt" data-i="' + i + '">' + String.fromCharCode(65 + i) + '. ' + o + '</button>';
+    }).join('');
+    document.querySelectorAll('#q-opts .opt').forEach(function (b) {
+      b.onclick = function () { answer(parseInt(b.dataset.i, 10)); };
+    });
+    document.getElementById('modal').classList.add('on');
+  }
+
+  function answer(i) {
+    var q = cur.quiz, btns = document.querySelectorAll('#q-opts .opt');
+    btns.forEach(function (b) { b.disabled = true; });
+    if (i === q.answer) {
+      btns[i].classList.add('right');
+      var fb = document.getElementById('q-fb');
+      fb.innerHTML = '<b>点亮。</b>' + q.tip;
+      fb.classList.add('on');
+      if (lit.indexOf(cur.id) < 0) lit.push(cur.id);
+      save(); paintProgress();
+      setTimeout(function () {
+        document.getElementById('modal').classList.remove('on');
+        if (lit.length === NODES.length) { finishAll(); } else { go('s-map'); }
+      }, 1600);
+    } else {
+      btns[i].classList.add('wrong');
+      var fb2 = document.getElementById('q-fb');
+      fb2.textContent = '再想想。' + q.tip;
+      fb2.classList.add('on');
+      setTimeout(function () {
+        btns.forEach(function (b) { b.disabled = false; b.classList.remove('wrong'); });
+      }, 1200);
+    }
+  }
+
+  function finishAll() {
+    document.querySelector('#s-done h2').textContent = '十二个点，全部点亮';
+    document.querySelector('#s-done p').textContent = '这里接后测量表与个人认知报告。';
+    go('s-done');
+  }
+
+  function resetAll() {
+    lit = []; save(); paintProgress(); go('s-map');
+  }
+
+  /* ---------- 视差 ---------- */
+  (function parallax() {
+    var scene = document.getElementById('scene');
+    var far = document.getElementById('l-far'), mid = document.getElementById('l-mid'), near = document.getElementById('l-near');
+    function move(cx, cy) {
+      var r = scene.getBoundingClientRect();
+      var dx = (cx - r.left) / r.width - .5, dy = (cy - r.top) / r.height - .5;
+      far.style.transform = 'translate(' + (-dx * 8) + 'px,' + (-dy * 6) + 'px)';
+      mid.style.transform = 'translate(' + (-dx * 20) + 'px,' + (-dy * 14) + 'px)';
+      near.style.transform = 'translate(' + (-dx * 38) + 'px,' + (-dy * 24) + 'px)';
+    }
+    scene.addEventListener('mousemove', function (e) { move(e.clientX, e.clientY); });
+    scene.addEventListener('touchmove', function (e) {
+      if (e.touches[0]) move(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+  })();
 </script>
 </body>
 </html>
